@@ -1,0 +1,79 @@
+p_ID	p_Name	p_Brand	p_link	p_price	p_category	p_sku	p_stars	p_nReviews
+	P439058	Violet-C Brightening Serum 20% Vitamin C + 10% AHA	Tatcha	https://www.sephora.com/product/violet-c-brightening-serum-vitamin-c-aha-P439058	88.00	Face Serums	2181055	4.7945	472
+	P427407	Unicorn Essence Antioxidant Primer Serum	GLAMGLOW	https://www.sephora.com/product/the-ordinary-deciem-salicylic-acid-2-solution-P427407	58.00	Face Serums	2106086	4.3333	222
+	P417108	Alpha Arbutin 2% + HA	Origins	https://www.sephora.com/product/the-concentrate-P417108	49.00	Face Serums	2162428	3.9434	53
+	P427414	The Concentrate	Dior	https://www.sephora.com/product/the-ordinary-deciem-natural-moisturizing-factors-ha-P427414	49.00	Face Serums	1424241	4.1587	189
+	P379510	Vinoperfect Radiance Serum	OLEHENRIKSEN	https://www.sephora.com/product/advanced-genifique-youth-activating-serum-P379510	128.00	Face Serums	2024511	4.5026	1166
+	P421235	Advanced Génifique Youth Activating Serum	CLINIQUE	https://www.sephora.com/product/double-serum-complete-age-control-concentrate-P421235	92.00	Face Serums	2185445	4.0885	384
+	P94421	Salicylic Acid 2% Solution	BECCA	https://www.sephora.com/product/vinoperfect-radiance-serum-P94421	7.90	Face Serums	2031458	4.2393	2018
+	P417139	Skintune Blur Perfecting Primer Serum	Caudalie	https://www.sephora.com/product/rose-gold-elixir-P417139	11.50	Face Serums	2031516	3.9614	1502
+	P436269	Natural Moisturizing Factors + HA	Murad	https://www.sephora.com/product/skintune-blur-perfecting-primer-serum-P436269	39.00	Face Serums	2163384	4.0233	258
+	P427413	Double Serum Complete Age Control Concentrate	Algenist	https://www.sephora.com/product/the-ordinary-deciem-lactic-acid-10-ha-2-P427413	85.00	Face Serums	1933225	4.6122	98
+	P393718	Lactic Acid 10% + HA 2%	Murad	https://www.sephora.com/product/luna-sleeping-night-oil-P393718	36.00	Face Serums	2087914	4.1251	1791
+	P421998	Luna Sleeping Night Oil	Biossance	https://www.sephora.com/product/midnight-recovery-concentrate-P421998	49.00	Face Serums	2114932	4.4056	461
+	P379994	Midnight Recovery Concentrate	Murad	https://www.sephora.com/product/advanced-night-repair-synchronized-recovery-complex-ii-P379994	8.90	Face Serums	2031441	4.3411	516
+	P411540	Advanced Night Repair Synchronized Recovery Complex II	Caudalie	https://www.sephora.com/product/cicapair-tiger-grass-color-correcting-treatment-spf-30-P411540	5.80	Face Serums	2031425	4.2262	1578
+	P282920	Pore Refining Solutions Correcting Serum	SK-II	https://www.sephora.com/product/pore-refining-solutions-correcting-serum-P282920	150.00	Face Serums	1850155	3.86	400
+	P427733	Capture Youth Matte Maximizer Age-Delay Mattifying Serum	philosophy	https://www.sephora.com/product/capture-youth-matte-maximizer-age-delay-mattifying-serum-P427733	48.00	Face Serums	1318658	3.75	4
+	P391634	French Pine Bark Serum ANTIOXIDANT PROTECTION	NARS	https://www.sephora.com/product/french-pine-bark-serum-antioxidant-protection-P391634	95.00	Face Serums	2028389	4.3333	9
+	P413427	Oxygen Booster	philosophy	https://www.sephora.com/product/oxygen-booster-P413427	270.00	Face Serums	946764	3.8	5
+	P230805	POETRY in Lotion®	Algenist	https://www.sephora.com/product/poetry-in-lotion-P230805	35.00	Face Serums	1657998	4.3533	184
+	P159005	Crème Ancienne Face Oil Elixir	KENZOKI	https://www.sephora.com/product/elixir-ancien-P159005	75.00	Face Serums	1133701	3.6154	26
+	P213200	Super Aqua-Serum	AMOREPACIFIC	https://www.sephora.com/product/super-aqua-serum-P213200	90.00	Face Serums	1889203	4.3043	23
+	P427512	Perfectionist Pro Instant Wrinkle Filler Tri-Polymer Blend	SK-II	https://www.sephora.com/product/perfectionist-pro-instant-wrinkle-filler-tri-polymer-blend-P427512	180.00	Face Serums	1088046	3.0	2
+	P416592	Brightening Serum with Glycolic Acid	Algenist	https://www.sephora.com/product/brightening-serum-with-glycolic-acid-P416592	54.00	Face Serums	2032050	4.1935	31
+	P407176	Ain’t Misbehavin’® Intensive 10% Sulfur Acne Mask & Emergency Spot Treatment	Guerlain	https://www.sephora.com/product/ain-t-misbehavin-intensive-10-sulfur-acne-mask-emergency-spot-treatment-P407176	35.00	Face Serums	1657931	4.1	20
+	P181705	Ain’t Misbehavin’ Medicated Acne Control Serum	Guerlain	https://www.sephora.com/product/aint-misbehavin-medicated-acne-control-serum-P181705	50.00	Face Serums	1897552	4.0728	261
+	P391639	Coenzyme Q10 Serum ENERGIZE & RENEW	Guerlain	https://www.sephora.com/product/coenzyme-q10-serum-energize-renew-P391639	48.00	Face Serums	1000462	4.0	2
+	P409918	KateCeuticals™ Restor8 Replenishing Serum	KENZOKI	https://www.sephora.com/product/kateceuticals-restor8-replenishing-serum-P409918	48.00	Face Serums	1817972	4.25	4
+	P423166	Future Solution LX Intensive Firming Contour Serum	Shiseido	https://www.sephora.com/product/future-solution-lx-intensive-firming-contour-serum-P423166	170.00	Face Serums	1851047	4.25	4
+	P399981	Mission Perfection Serum	Lancôme	https://www.sephora.com/product/mission-perfection-serum-P399981	306.00	Face Serums	2009223	4.1395	43
+	P419817	Time Retreat Radiance Boost Treatment	CLINIQUE	https://www.sephora.com/product/time-retreat-radiance-boost-treatment-P419817	74.00	Face Serums	1747708	4.75	4
+	P383132	Plantscription™ Youth-Renewing Face Oil	Shiseido	https://www.sephora.com/product/plantscription-tm-youth-renewing-face-oil-P383132	80.00	Face Serums	2125805	4.6098	41
+	P399649	No:Rinse DMAE Firming Pads	L'Occitane	https://www.sephora.com/product/dmae-firming-pads-P399649	95.00	Face Serums	1958560	4.2712	177
+	P385578	Super Aqua-Crème Day Gel	DERMAdoctor	https://www.sephora.com/product/super-aqua-creme-day-gel-P385578	42.00	Face Serums	784488	3.6667	3
+	P73515	Picture Porefect	Conture	https://www.sephora.com/product/picture-porefect-P73515	55.00	Face Serums	1560937	3.8361	305
+	P393014	Bio-Performance Glow Revival Serum	Origins	https://www.sephora.com/product/bio-performance-glow-revival-serum-P393014	39.00	Face Serums	1768175	4.1944	36
+	P402694	Gel Primer 24K Gold Complex - Brighten	Algenist	https://www.sephora.com/product/gel-primer-24k-gold-complex-brighten-P402694	135.00	Face Serums	1580695	3.875	8
+	P72704	High Performance Vitamin C Facial Serum	CLINIQUE	https://www.sephora.com/product/high-performance-vitamin-c-facial-serum-P72704	46.00	Face Serums	1605674	4.5	36
+	P423728	My Daily Dose of Vitamins	DERMAdoctor	https://www.sephora.com/product/my-daily-dose-vitamins-P423728	65.00	Face Serums	1976919	4.1765	17
+	P408254	Crystal Iceplant Pressed Serum	DERMAdoctor	https://www.sephora.com/product/crystal-iceplant-pressed-serum-P408254	49.00	Face Serums	1833037	4.4138	29
+	P394691	Immortelle Divine Extract	Guerlain	https://www.sephora.com/product/immortelle-divine-extract-P394691	119.00	Face Serums	1660414	4.5	8
+	P387137	Mega-C™ Dual Radiance Serum	DERMAdoctor	https://www.sephora.com/product/mega-c-dual-radiance-serum-P387137	90.00	Face Serums	1630136	3.6452	31
+	P308602	Umbrian Clay Mattifying Serum	Shiseido	https://www.sephora.com/product/umbrian-clay-mattifying-serum-P308602	38.00	Face Serums	1418557	3.7128	94
+	P384601	Photodynamic Therapy Age Spot Eraser & Skin Brightener	Clarins	https://www.sephora.com/product/photodynamic-therapy-age-spot-eraser-skin-brightener-P384601	60.00	Face Serums	1566058	3.7692	13
+	P72705	High Performance Vitamin A Facial Treatment	Origins	https://www.sephora.com/product/high-performance-vitamin-a-facial-treatment-P72705	49.00	Face Serums	1605484	4.3	30
+	P439641	Stem Cell Serum	DERMAdoctor	https://www.sephora.com/product/stem-cell-serum-P439641	135.00	Face Serums	2172872	4.5	2
+	P302932	Wrinkle Revenge® Ultimate Hyaluronic Serum	Guerlain	https://www.sephora.com/product/wrinkle-revenge-ultimate-hyaluronic-serum-P302932	68.00	Face Serums	1395649	4.0263	76
+	P309212	Rose Lifting Serum	Shiseido	https://www.sephora.com/product/rose-lifting-serum-P309212	185.00	Face Serums	1424068	4.2	5
+	P399751	Advanced C Radiance Cream with Vitamin C Collagen Cofactor 10x	NuFACE	https://www.sephora.com/product/advanced-c-radiance-cream-vitamin-c-collagen-cofactor-P399751	85.00	Face Serums	1747849	3.9524	21
+	P399747	Intensive Night Treatment with Hylaplex® and Marula Oil	Anthony	https://www.sephora.com/product/intensive-night-treatment-hylaplex-marula-oil-P399747	155.00	Face Serums	1748029	4.2857	7
+	P391635	Chlorella Serum BRIGHTEN & TACKLE SPOTS	LightStim	https://www.sephora.com/product/chlorella-serum-brighten-tackle-spots-P391635	35.00	Face Serums	1657980	3.64	25
+	P381439	Dynaspot	L'Occitane	https://www.sephora.com/product/dynaspot-P381439	34.00	Face Serums	1560218	3.9091	11
+	P440471	Visionnaire Skin Solutions 15% Pure Vitamin C Correcting Concentrate	Blithe	https://www.sephora.com/product/visionnaire-skin-solutions-15-pure-vitamin-c-correcting-concentrate-P440471	65.00	Face Serums	2186757	4.3694	379
+	P407101	Serum Savant	Anthony	https://www.sephora.com/product/serum-savant-P407101	250.00	Face Serums	1822154	4.1667	6
+	P417604	Hydra Life Deep Hydration Sorbet Water Essence	Fresh	https://www.sephora.com/product/hydra-life-deep-hydration-sorbet-water-essence-P417604	73.00	Face Serums	1893031	4.5238	21
+	P411358	Vitamin B3+ Niacinamide Serum RESCUE TROUBLED SKIN	DERMAdoctor	https://www.sephora.com/product/vitamin-b3-niacinamide-serum-rescue-troubled-skin-P411358	35.00	Face Serums	1837228	3.45	20
+	P415682	MOISTURE BOUND Hydration Boost	Lancer	https://www.sephora.com/product/moisture-bound-hydration-boost-P415682	120.00	Face Serums	1906635	4.7273	11
+	P384790	Future Solution LX Superior Radiance Serum	Omorovicza	https://www.sephora.com/product/future-solution-lx-superior-radiance-serum-P384790	225.00	Face Serums	1567643	3.8	5
+	P385269	Clinical Concentrate Radiance Booster™	Lancer	https://www.sephora.com/product/clinical-concentrate-radiance-booster-P385269	68.00	Face Serums	1591015	3.9545	44
+	P415702	pores no more® multi-performance stick	Lancôme	https://www.sephora.com/product/pores-no-more-multi-performance-stick-P415702	35.00	Face Serums	1899111	3.6484	91
+	P381433	Intense Hydration Serum	Dior	https://www.sephora.com/product/intense-hydration-serum-P381433	95.00	Face Serums	1560283	3.8333	12
+	P386839	Pore Master Patch	AMOREPACIFIC	https://www.sephora.com/product/pore-master-patch-P386839	7.50	Face Serums	1622398	3.3744	211
+	P424946	Tight'N™ Cryogenic Tightening Gel	Shiseido	https://www.sephora.com/product/tight-n-tm-cryogenic-tightening-gel-P424946	98.00	Face Serums	2015006	4.0301	133
+	P406311	Hyaluronic Marine Hydration Booster	Anthony	https://www.sephora.com/product/white-lucent-microtargeting-spot-corrector-P406311	82.00	Face Serums	1545748	3.3793	58
+	P394357	White Lucent MicroTargeting Spot Corrector	Origins	https://www.sephora.com/product/my-daily-dose-custom-blended-serum-set-P394357	69.00	Face Serums	1431436	4.2562	121
+	P397052	My Daily Dose Custom-Blended Serum Set	NuFACE	https://www.sephora.com/product/abeille-royale-daily-repair-serum-P397052	115.00	Face Serums	1874718	3.5625	16
+	P432055	Repairwear Laser Focus	bareMinerals	https://www.sephora.com/product/wild-rose-15-vitamin-c-spotless-serum-P432055	12.00	Face Serums	2185395	3.9167	60
+	P268300	Abeille Royale Daily Repair Serum	Lancer	https://www.sephora.com/product/repairwear-laser-focus-P268300	42.00	Face Serums	1602846	4.1244	651
+	P416728	Wild Rose 15% Vitamin C Spotless Serum	NARS	https://www.sephora.com/product/capture-totale-dreamskin-advanced-refill-P416728	86.00	Face Serums	1490150	5.0	7
+	P437240	Capture Totale Dreamskin Advanced Refill	bareMinerals	https://www.sephora.com/product/firming-serum-with-energy-peptides-P437240	100.00	Face Serums	1328053	4.4609	128
+	P188907	Help Me	Proactiv	https://www.sephora.com/product/post-acne-spot-lightening-gel-P188907	85.00	Face Serums	784421	3.7439	449
+	P427509	Post-Acne Spot Lightening Gel	Erborian	https://www.sephora.com/product/premier-cru-serum-P427509	47.00	Face Serums	1685916	4.0946	74
+	P440059	Premier Cru Serum	philosophy	https://www.sephora.com/product/blackhead-dissolving-gel-P440059	95.00	Face Serums	2028413	5.0	1
+	P418870	Blackhead Dissolving Gel	Dior	https://www.sephora.com/product/black-pine-3d-sculpting-firming-lifting-face-serum-P418870	95.00	Face Serums	2028405	4.5833	24
+	P416826	Bye Bye Pores Primer™ Oil-Free Poreless Skin-Perfecting Serum Primer	Murad	https://www.sephora.com/product/fab-skin-lab-resurfacing-liquid-10-aha-P416826	229.00	Face Serums	2138402	4.4667	105
+	P388974	FAB Skin Lab Resurfacing Liquid 10% AHA	AMOREPACIFIC	https://www.sephora.com/product/hyalo-plasma-hyaluronic-intensive-moisturizer-P388974	98.00	Face Serums	1658251	4.4656	262
+	P433951	High Potency Classics: Hyaluronic Intensive Moisturizer	Murad	https://www.sephora.com/product/essential-fx-acyl-glutathione-deep-crease-serum-P433951	95.00	Face Serums	1675891	4.6276	145
+	P4647	Peptidin™ Firming Serum with Energy Peptides	LANEIGE	https://www.sephora.com/product/help-me-P4647	59.00	Face Serums	1942556	4.3645	1177
+	P411400	Black Pine 3D Sculpting, Firming & Lifting Face Serum	Clarins	https://www.sephora.com/product/bye-bye-pores-primer-oil-free-poreless-skin-perfecting-serum-primer-P411400	75.00	Face Serums	2032043	3.6264	174
