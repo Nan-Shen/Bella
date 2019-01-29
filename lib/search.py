@@ -15,7 +15,7 @@ from gensim.models import Word2Vec, FastText
 from textblob import TextBlob
 
 class BellaSearch(object):
-    """All parse, clean and preprocess
+    """Semantic search models, sentiment analysis and search for top products
     """
     def __init__(self):
         """
