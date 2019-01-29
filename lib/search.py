@@ -21,6 +21,40 @@ class BellaSearch(object):
         """
         """
         pass
+    
+    def CustomizedSearch(self, concerns, ft, w2v, product_fp, review_fp,
+                         model='fasttext', n_similar_words=10, n_product=3):
+        """Search for reviews containing words semantically similar to keywords
+        and sum up sentiment score by products. Return products with highest 
+        score.
+        concerns: string seperated by comma, e.g. wrinkle,pore
+        ft: fast text word embedding model trained on reviews
+        w2v: word2vec embedding model trained on reviews
+        product_fp: product information file path.
+        review_fp: review information file path, containing sentiment scores.
+        model: word embedding models, fasttext or word2vec
+        """
+        df = pd.read_table(review_fp)
+        if model == 'fasttext':
+            topn = self.concern_score(df, concerns, ft, n_similar_words, n_product)
+        elif model == 'word2vec':
+            topn = self.concern_score(df, concerns, w2v, n_similar_words, n_product)
+        
+        brands = []
+        names = []
+        functions = []
+        links = []
+        images = []
+        for product_id in topn:
+            p_Brand, p_Name, p_function, \
+                     p_link, p_image =  self.search_product(product_fp, 
+                                                            product_id)
+            brands.append(p_Brand)
+            names.append(p_Name)
+            functions.append(p_function)
+            linksa.append(p_link)
+            images.append(p_image)
+            
         
     def w2v_model(self, tokenized_text, size=150, window=10):
         """Train a word2vec model, get embeddings for semantic search of query.
@@ -65,20 +99,21 @@ class BellaSearch(object):
                                         axis=1)
         return feature_score
     
-    def concern_score(self, df, concerns, w2v_model, n_similar_words=10, n_product=5):
+    def concern_score(self, df, concerns, embedding_model, n_similar_words=10, n_product=5):
         """Sum up scores based on every concern.
         df: dataframe, review file parsed by parse_reviewTable(), with 'review'
         column containing title and text of reviews and 'r_product' containing
         product ID.
         concerns:a string from request, concerns seperated by comma.
-        w2v_model: wrod2vec model trained on reviews.
+        embedding_model: word embedding model trained on reviews, can be 
+                         fasttext or word2vec.
         n_similiar_words: number of similar words to be considered.
         n_product: number of products to recommend.
         """
         c_score = [0] * df.shape[0]
         concerns = concerns.split(',')
         for concern in concerns:
-            key_words = w2v_model.wv.most_similar(positive=concern, 
+            key_words = embedding_model.wv.most_similar(positive=concern, 
                                                   topn=n_similar_words)
             f_score = self.feature_score(df, key_words, review_column='reviews')
             c_score = map(sum, zip(c_score, f_score))
