@@ -8,34 +8,12 @@ Created on Sun Jan 20 22:25:39 2019
 import pandas as pd
 import re
 import string
-import numpy as np
-from collections import defaultdict
 
-import matplotlib.pyplot as plt
-import seaborn as sns
-
-import nltk
 from nltk.tokenize.punkt import PunktSentenceTokenizer, PunktParameters
 from nltk.tokenize import RegexpTokenizer
 from nltk.stem.snowball import SnowballStemmer
 from nltk.corpus import stopwords 
 from nltk.stem.wordnet import WordNetLemmatizer
-from nltk.cluster import KMeansClusterer
-
-from gensim.models import Word2Vec, FastText
-from gensim import models
-from gensim.models.coherencemodel import CoherenceModel
-
-#from glove import Glove, Corpus
-
-from sklearn.feature_extraction.text import CountVectorizer, TfidfTransformer, TfidfVectorizer
-from sklearn.decomposition import NMF, PCA, LatentDirichletAllocation
-from sklearn.manifold import TSNE
-	
-#import pyLDAvis.sklearn
-
-
-from textblob import TextBlob
 
 class BellaParse(object):
     """All parse, clean and preprocess
