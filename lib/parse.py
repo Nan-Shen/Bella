@@ -33,7 +33,8 @@ class BellaParse(object):
                             'i used to', 'if you have', 'i suffer')
         
     def parse_reviewTable(self, fp, short_sentence=True, products='all'):
-        """Load all reviews of give list or all products in data.
+        """Load all reviews of give list or all products in data. Remove
+        diplicates.
         fp: file path of scraped reviews.
         products: 'all' to include all products or a list of product ID. e.g.
           producst = ['P67898', 'P89098']
@@ -43,6 +44,7 @@ class BellaParse(object):
                      errors='coerce')
         tb['r_content'] = tb['r_title'] + '. ' + tb['r_text']
         tb = tb.dropna(subset=['r_content'])
+        tb = tb.drop_duplicates(subset=['r_content'])
         #remove non-ascii signs
         tb['r_content'] = tb['r_content'] \
                           .map(lambda s: ''.join(filter(lambda x: x in self.printable, s)))
