@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% block content %}
+    <h1>Ciao Bella!</h1>
+<form action="" method="post" name="index">
+    {{ form.hidden_tag() }}
+    <p>
+        Log in as<br>
+        {{ form.identity }}
+        <br>
+    </p>
+    <p><input type="submit" value="Go"></p>
+</form>
+{% endblock %}

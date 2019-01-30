@@ -1,0 +1,15 @@
+<!-- extend from base layout -->
+{% extends "base.html" %}
+
+{% block content %}
+<h1>Bella Business Analyst</h1>
+<form action="" method="post" name="business">
+      {{ form.hidden_tag() }}
+      <p>
+          What type of product are you interested in?<br>
+          {{ form.category }}
+          <br>
+      </p>
+      <p><input type="submit" value="Go"></p>
+</form>
+{% endblock %}
