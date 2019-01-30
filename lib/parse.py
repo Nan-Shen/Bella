@@ -44,7 +44,6 @@ class BellaParse(object):
                      errors='coerce')
         tb['r_content'] = tb['r_title'] + '. ' + tb['r_text']
         tb = tb.dropna(subset=['r_content'])
-        tb = tb.drop_duplicates(subset=['r_content'])
         #remove non-ascii signs
         tb['r_content'] = tb['r_content'] \
                           .map(lambda s: ''.join(filter(lambda x: x in self.printable, s)))
@@ -55,7 +54,7 @@ class BellaParse(object):
         #transform table to put each part of review into one row
         review_parts = tb.r_parts.apply(pd.Series) \
                          .merge(tb, right_index = True, left_index = True) \
-                         .drop(['r_text', 'r_title', 'r_content'], axis = 1) \
+                         .drop(['r_text', 'r_title', 'r_content', 'r_parts'], axis = 1) \
                          .melt(id_vars = ['r_product', 'r_reviewer', 
                                           'r_time', 'r_star'], 
                                value_name = 'review') \
@@ -122,7 +121,31 @@ class BellaParse(object):
         tokenizer_regex = re.compile(r'[\s]')
         tokens = [tok.strip().lower() for tok in tokenizer_regex.split(text)]
         return tokens
-            
+     
+    def parse_product(self, fp):
+        """Parse product information file, return product link, image, and skin
+        concerns it solves.
+        fp: file path of product file.
+        """
+        df = pd.read_table(fp)
+        functions = []
+        for i in range(df.shape[0]):
+            des = df['p_description'].iloc[i]
+            try:
+                functions.append(re.findall('Solutions for:([\S\s]+)'\
+                                       'If you want to know more', des)[0])
+            except:
+                try:
+                    functions.append(re.findall('Skincare Concerns:([\S\s]+)'
+                                           'Formulation:', des)[0])
+                except:
+                    try:
+                        functions.append(re.findall('What it is:([\S\s]+)'\
+                                               'What it', des)[0])
+                    except:
+                        functions.append('NA')
+        df['p_function'] = functions
+        return df
             
     """ review_parts = parse_reviewTable(fp, products='all')
     #drop cuplicates in tokenized text first, otherwise there will be error
