@@ -95,9 +95,10 @@ class BellaSearch(object):
         c_score = self.feature_score(df, key_words, review_column='reviews')
         df['concern_score'] = c_score
         product_score = df.groupby(['r_product'])[['concern_score']].sum()
-        product_score = product_score.sort_values(by='concern_score', 
-                                                  ascending=False)
-        top_products = product_score[:n_product].index.values
+        #product_score = product_score.sort_values(by='concern_score', 
+         #                                         ascending=False)
+        #top_products = product_score[:n_product].index.values
+        top_products = product_score.nlargest(n_product, 'concern_score').index.values
         return top_products
     
     def search_product(self, df, top_product_id, 
