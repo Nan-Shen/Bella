@@ -40,20 +40,14 @@ class BellaSearch(object):
         elif model == 'word2vec':
             topn = self.concern_score(df, concerns, w2v, n_similar_words, n_product)
         
-        brands = []
-        names = []
-        functions = []
-        links = []
-        images = []
+        products = []
         for product_id in topn:
             p_Brand, p_Name, p_function, \
                      p_link, p_image =  self.search_product(product_fp, 
                                                             product_id)
-            brands.append(p_Brand)
-            names.append(p_Name)
-            functions.append(p_function)
-            linksa.append(p_link)
-            images.append(p_image)
+            products.append((p_Brand, p_Name, p_function, \
+                             p_link, p_image))
+        return products
             
         
     def w2v_model(self, tokenized_text, size=150, window=10):
@@ -111,7 +105,7 @@ class BellaSearch(object):
         n_product: number of products to recommend.
         """
         c_score = [0] * df.shape[0]
-        concerns = concerns.split(',')
+        concerns = map(lambda w: w.strip(), concerns.split(','))
         for concern in concerns:
             key_words = embedding_model.wv.most_similar(positive=concern, 
                                                   topn=n_similar_words)
@@ -123,31 +117,6 @@ class BellaSearch(object):
                                                   ascending=False)
         top_products = product_score['r_product'].head(n_product).values
         return top_products
-    
-    def parse_product(self, fp):
-        """Parse product information file, return product link, image, and skin
-        concerns it solves.
-        fp: file path of product file.
-        """
-        df = pd.read_table(fp)
-        functions = []
-        for i in range(df.shape[0]):
-            des = df['p_description'].iloc[i]
-            try:
-                functions.append(re.findall('Solutions for:([\S\s]+)'\
-                                       'If you want to know more', des)[0])
-            except:
-                try:
-                    functions.append(re.findall('Skincare Concerns:([\S\s]+)'
-                                           'Formulation:', des)[0])
-                except:
-                    try:
-                        functions.append(re.findall('What it is:([\S\s]+)'\
-                                               'What it', des)[0])
-                    except:
-                        functions.append('NA')
-        df['p_function'] = functions
-        return df
     
     def search_product(self, fp, product_id):
         """Look for product based on product id, return brand brand, 
