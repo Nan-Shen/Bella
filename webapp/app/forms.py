@@ -24,3 +24,4 @@ class BusinessForm(FlaskForm):
                                    ('serum', 'Serum')],
                           default='Serum',
                           validators=[DataRequired()])
+    review = StringField('new_review')
