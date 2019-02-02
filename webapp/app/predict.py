@@ -126,7 +126,7 @@ class BellaModel(object):
         img = StringIO.StringIO()
         df.plot.bar(stacked=True, 
                     colormap=ListedColormap(sns.color_palette('pastel')))
-        ax.set(ylabel='Topics', xlabel='Topic importance')
+        ax.set(ylabel='Counts', xlabel='Stars')
         plt.savefig(img, format='png')
         img.seek(0)
         plot_url = base64.b64encode(img.getvalue()).decode()
