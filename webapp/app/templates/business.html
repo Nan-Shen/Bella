@@ -6,26 +6,28 @@
 <form action="" method="post" name="business">
       {{ form.hidden_tag() }}
       <p>
-          What type of product are you interested in?<br>
-          {{ form.category }}
+          Which topic are you interested in?<br>
+          {{ form.topic }}
           <br>
       </p>
       <p>
-          Predict rating of a review: <br>
-          {{ form.review(size=30) }}<br>
+          Group people by: <br>
+          {{ form.category }}<br>
       </p>
+      <p>{{ form.random }} Random Reviews</p>
+      
+      <p><input type="submit" value="Go"></p>
       <hr>
-      {% for text in rating %}
+      {% for review in reviews %}
           <table>
           <tr valign="top">
-            <td>{{ text.rate}} <br> 
+            <td>{{review}} <br> </td>
           </tr>
           </table>
       {% endfor %}
-      <p><input type="submit" value="Go"></p>
       {% for fig in plot_url %}
-      Features customers love: <br>
-         <img src={{fig}} alt="Features customers love:">
+      Distribution of customers in reviews about selected topic: <br>
+         <img src={{fig}} alt="customer distribution">
       {% endfor %}
 </form>
 {% endblock %}
