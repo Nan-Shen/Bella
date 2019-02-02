@@ -1,11 +1,8 @@
-from flask import render_template, flash, redirect, Flask, jsonify, request, Response, make_response
+from flask import render_template, flash, redirect, make_response
 from app import app
 from .forms import IndexForm, CustomerForm, BusinessForm
 from .search import BellaSearch
 from .predict import BellaModel
-
-from matplotlib.backends.backend_agg import FigureCanvasAgg as FigureCanvas
-import io
 
 #app = Flask(__name__)
 
@@ -26,23 +23,26 @@ def index():
 
 @app.route('/test', methods=['GET', 'POST'])
 def test():
-    return 'test on'
+    return render_template('test.html')
 
 @app.route('/business', methods=['GET', 'POST'])
 def business():
     form = BusinessForm()
-    rating = []
+    reviews = []
     plot_url = []
     if form.validate_on_submit():
-        flash('Analysing customer preference for %s ...' % form.category.data)
         bm = BellaModel()
-        rating = [{'rate':bm.PredictRating(form.category.data,
-                                           form.review.data)}]
-        plot_url = ["data:image/png;base64,%s" % bm.PlotFeatureImportance()]
+        reviews, url = bm.topic_summary(form.topic.data, 
+                                        form.category.data, 
+                                        random=form.random.data, 
+                                        n=5)
+        
+        plot_url = ["data:image/png;base64,%s" % url]
+        
     return render_template('business.html', 
                            title='Bella business',
                            form=form,
-                           rating=rating,
+                           reviews=reviews,
                            plot_url=plot_url)
     
 @app.route('/plot.png')
