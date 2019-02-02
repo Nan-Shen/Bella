@@ -1,6 +1,9 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, SelectField
+from wtforms import StringField, SelectField, BooleanField
 from wtforms.validators import DataRequired
+
+topics = ['aging', 'unclear', 'make up', 'look + scent', 'acne', 'pore + sensitive', 'price', 'routine']
+CHOICES = [(n, t) for t,n in zip(topics, range(8))]
 
 class IndexForm(FlaskForm):
     identity = SelectField('user_identity', 
@@ -18,10 +21,17 @@ class CustomerForm(FlaskForm):
                                    ('Face Serums', 'Serum')],
                           default='Serum')
 class BusinessForm(FlaskForm):
-    category = SelectField('product_types', 
-                          choices=[('toner', 'Toner'), 
-                                   ('moisterizer', 'Moisterizer'), 
-                                   ('serum', 'Serum')],
-                          default='Serum',
-                          validators=[DataRequired()])
-    review = StringField('new_review')
+    category = SelectField('customer_group', 
+                           choices=[('c_skintype', 'Skin Type'), 
+                                   ('c_skinconcerns', 'Skin Concerns'), 
+                                   ('c_age', 'Age')],
+                           validators=[DataRequired()])
+    random = BooleanField('Random Reviews')
+    topic = SelectField('customer_group', choices=[('0', 'aging'),
+                                                   ('1', 'unclear'),
+                                                    ('2', 'make up'),
+                                                    ('3', 'look + scent'),
+                                                    ('4', 'acne'),
+                                                    ('5', 'pore + sensitive'),
+                                                    ('6', 'price'),
+                                                    ('7', 'routine')])
