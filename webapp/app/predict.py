@@ -11,9 +11,11 @@ import numpy as np
 import seaborn as sns
 import matplotlib.pyplot as plt
 from matplotlib.figure import Figure
-from matplotlib.backends.backend_agg import FigureCanvasAgg as FigureCanvas
+#from matplotlib.backends.backend_agg import FigureCanvasAgg as FigureCanvas
+from matplotlib.colors import ListedColormap
 import StringIO
 import base64
+import sys
 
 import dill as pickle
 
@@ -88,6 +90,7 @@ class BellaModel(object):
     def topic_summary(self, topic, category, random=False, n=5):
         """
         """
+        topic = int(topic)
         fp = '/Users/Nan/Documents/insight/bella/bella/bellaflask/tmp/lda_vectors.df.pk'
         with open(fp,'rb') as f:
              topics = pickle.load(f)
@@ -115,7 +118,6 @@ class BellaModel(object):
         category: category to stratify reviewers, e.g. skin 
         concerns, skin types and age
         """
-        from matplotlib.colors import ListedColormap
         df = pd.DataFrame(topic_df.groupby(['r_star', category])[0].count())
         df.reset_index(inplace=True)  
         df = df.pivot(index='r_star', columns=category, values=0)
