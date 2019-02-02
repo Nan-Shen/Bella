@@ -85,14 +85,18 @@ class BellaModel(object):
         plot_url = base64.b64encode(img.getvalue()).decode()
         return plot_url
     
-    def topic_summary(self, topic, category, n=5):
+    def topic_summary(self, topic, category, random=False, n=5):
         """
         """
         fp = '/Users/Nan/Documents/insight/bella/bella/bellaflask/tmp/lda_vectors.df.pk'
         with open(fp,'rb') as f:
              topics = pickle.load(f)
         topic_df = topics[topics['dominant_topic'] == topic]
-        reviews = self.PullReviews(topic_df, n=n)
+        if random:
+            reviews = self.PullReviews(topic_df, n=n)
+        else:
+            topic_df = topic_df.sort_values(topic, ascending=False)
+            reviews = topic_df['review'].head()
         plot_url =  self.PlotReviewerDistribution(topic_df, category)
         return reviews, plot_url
         
