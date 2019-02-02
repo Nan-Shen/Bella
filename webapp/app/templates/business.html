@@ -10,6 +10,22 @@
           {{ form.category }}
           <br>
       </p>
+      <p>
+          Predict rating of a review: <br>
+          {{ form.review(size=30) }}<br>
+      </p>
+      <hr>
+      {% for text in rating %}
+          <table>
+          <tr valign="top">
+            <td>{{ text.rate}} <br> 
+          </tr>
+          </table>
+      {% endfor %}
       <p><input type="submit" value="Go"></p>
+      {% for fig in plot_url %}
+      Features customers love: <br>
+         <img src={{fig}} alt="Features customers love:">
+      {% endfor %}
 </form>
 {% endblock %}
