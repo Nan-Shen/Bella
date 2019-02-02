@@ -72,7 +72,7 @@ class BellaModel(object):
         img = StringIO.StringIO()
         sns.set_color_codes('pastel')
         ax = sns.barplot(x='importance', y='feature', data=feature_importances,
-                    label='importance', color='b', orient='h', order=topic_order)
+                    label='importance', orient='h', order=topic_order)
         #ax.barh(feature_importances['feature'], 
         #        feature_importances['importance'], align='center')
         # Add a legend and informative axis label
@@ -84,17 +84,26 @@ class BellaModel(object):
         img.seek(0)
         plot_url = base64.b64encode(img.getvalue()).decode()
         return plot_url
+    
+    def topic_summary(self, topic, category, n=5):
+        """
+        """
+        fp = '/Users/Nan/Documents/insight/bella/bella/bellaflask/tmp/lda_vectors.df.pk'
+        with open(fp,'rb') as f:
+             topics = pickle.load(f)
+        topic_df = topics[topics['dominant_topic'] == topic]
+        reviews = self.PullReviews(topic_df, n=n)
+        plot_url =  self.PlotReviewerDistribution(topic_df, category)
+        return reviews, plot_url
         
-    def PullReviews(self, topic):
+    def PullReviews(self, topic_df, n=5):
         """Pull representative reviews for specific topic
         topic: a topic in reviews, request from drop down menu
         """
-        topic_dic_fp = ''
-        with open(topic_dic_fp,'rb') as f:
-             topic_dic = pickle.load(f)
-        return topic_dic[topic]
+        texts = topic_df['review'].sample(n=n)   
+        return texts
         
-    def PlotReviewerDistribution(self, topic, category):
+    def PlotReviewerDistribution(self, topic_df, category):
         """Plot a stacked area bar plot of reviewers make reviews in one topic.
         X is ratings, stacked by selected reviewer category, such as skin 
         concerns, skin types and age.
@@ -102,19 +111,20 @@ class BellaModel(object):
         category: category to stratify reviewers, e.g. skin 
         concerns, skin types and age
         """
-        reviewer_dic_fp = ''
-        with open(topic_dic_fp,'rb') as f:
-             reviewer_dic = pickle.load(f)
         from matplotlib.colors import ListedColormap
-        df.set_index(category)\
-          .reindex(df.set_index(category).sum().sort_values().index, axis=1)\
-          .T.plot(kind='bar', stacked=True,
-              colormap=ListedColormap(sns.color_palette("GnBu", 10)), 
-              figsize=(12,6))
-        columns=["App","Feature1", "Feature2","Feature3",
-                           "Feature4","Feature5",
-                           "Feature6","Feature7","Feature8"], 
-        return topic_dic[topic]
+        df = pd.DataFrame(topic_df.groupby(['r_star', category])[0].count())
+        df.reset_index(inplace=True)  
+        df = df.pivot(index='r_star', columns=category, values=0)
+        fig = Figure()
+        ax = fig.add_subplot(1, 1, 1)
+        img = StringIO.StringIO()
+        df.plot.bar(stacked=True, 
+                    colormap=ListedColormap(sns.color_palette('pastel')))
+        ax.set(ylabel='Topics', xlabel='Topic importance')
+        plt.savefig(img, format='png')
+        img.seek(0)
+        plot_url = base64.b64encode(img.getvalue()).decode()
+        return plot_url
         
         
             
