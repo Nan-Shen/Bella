@@ -82,7 +82,9 @@ class BellaSearch(object):
                                  axis=1)
         return feature_score
     
-    def concern_score(self, df, concerns, embedding_model, n_similar_words=10, n_product=5):
+    def concern_score(self, df, concerns, embedding_model, 
+                      use_similarity_score=False, n_similar_words=10, 
+                      n_product=5):
         """Sum up scores based on every concern.
         df: dataframe, review file parsed by parse_reviewTable(), with 'review'
         column containing title and text of reviews and 'r_product' containing
@@ -90,11 +92,14 @@ class BellaSearch(object):
         concerns:a string from request, concerns seperated by comma.
         embedding_model: word embedding model trained on reviews, can be 
                          fasttext or word2vec.
+        use_similarity_score: when passed true sentiment score is multiplies
+                             keyword similarity score to user input.
         n_similiar_words: number of similar words to be considered.
         n_product: number of products to recommend.
         """
         concerns = map(lambda w: w.strip(), concerns.split(','))
         key_words = {}
+        use_similarity_score = int(use_similarity_score)
         for concern in concerns:
             try:
                words = embedding_model.wv.most_similar(positive=concern, 
@@ -104,7 +109,8 @@ class BellaSearch(object):
                #concern not in volvabulary
                words = [(concern, 1)]
             for w, v in words:
-               key_words[w] = key_words.get(w, 0) + v
+               key_words[w] = key_words.get(w, 0) + v / (v ** use_similarity_score)
+
         c_score = self.feature_score(df, key_words, review_column='reviews')
         df['concern_score'] = c_score
         product_score = df.groupby(['r_product'])[['concern_score']].sum()
