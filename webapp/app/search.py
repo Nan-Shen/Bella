@@ -8,7 +8,7 @@ Created on Mon Jan 28 21:58:18 2019
 import pandas as pd
 import numpy as np
 
-import dill as pickle
+import pickle
 
 class BellaSearch(object):
     """Semantic search models, sentiment analysis and search for top products
@@ -48,6 +48,9 @@ class BellaSearch(object):
             model_fp = self.db_fp + 'fasttext.pk'
         with open(model_fp,'rb') as f:
             embedding_model = pickle.load(f)
+            #u = pickle._Unpickler(f)
+            #u.encoding = 'latin1'
+            #embedding_model = u.load()
         print('Word embedding model loaded')
             
         topn = self.concern_score(reviews, concerns, embedding_model, 
@@ -93,10 +96,15 @@ class BellaSearch(object):
         concerns = map(lambda w: w.strip(), concerns.split(','))
         key_words = {}
         for concern in concerns:
-            words = embedding_model.wv.most_similar(positive=concern, 
+            try:
+               words = embedding_model.wv.most_similar(positive=concern, 
                                                   topn=n_similar_words)
+               words.append((concern, 1))
+            except:
+               #concern not in volvabulary
+               words = [(concern, 1)]
             for w, v in words:
-                key_words[w] = key_words.get(w, 0) + v
+               key_words[w] = key_words.get(w, 0) + v
         c_score = self.feature_score(df, key_words, review_column='reviews')
         df['concern_score'] = c_score
         product_score = df.groupby(['r_product'])[['concern_score']].sum()
