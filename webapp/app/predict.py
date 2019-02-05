@@ -13,11 +13,15 @@ import matplotlib.pyplot as plt
 from matplotlib.figure import Figure
 #from matplotlib.backends.backend_agg import FigureCanvasAgg as FigureCanvas
 from matplotlib.colors import ListedColormap
-from io import BytesIO
+import matplotlib
+#python3
+#from io import BytesIO
+#python2
+import StringIO
 import base64
 import sys
 
-import dill as pickle
+import pickle
 
 class BellaModel(object):
     """Prediction model from reviews to rating. Give feature importance ranking.
@@ -25,8 +29,8 @@ class BellaModel(object):
     def __init__(self):
         """
         """
-        self.db_fp = '/Users/Nan/Documents/insight/bella/bella/bellaflask/tmp/'
-        #self.db_fp = '/home/ubuntu/bellaflask/tmp/'
+        #self.db_fp = '/Users/Nan/Documents/insight/bella/bella/bellaflask/tmp/'
+        self.db_fp = '/home/ubuntu/bellaflask/tmp/'
     
     def PredictRating(self, category, text):
         """
@@ -39,7 +43,7 @@ class BellaModel(object):
         #document to topic vector
         topic_model_fp = self.db_fp + 'lda_topic_model.pk'
         with open(topic_model_fp,'rb') as f:
-             topic_model = pickle.load(f)
+             topic_model  = pickle.load(f)
         topic_vec = topic_model.transform(text_vec)
         #predict rating
         predict_model_fp = self.db_fp + 'lda_GB.model.pk'
@@ -125,9 +129,15 @@ class BellaModel(object):
         df = pd.DataFrame(topic_df.groupby(['r_star', category]).count()['0'])
         df.reset_index(inplace=True)  
         df = df.pivot(index='r_star', columns=category, values='0')
+        #matplotlib cannot find the display device on a remote machine
+        #use ssh -X -i $hostname:xxxx to log in
+        #matplotlib.use('GTK3Cairo')
         fig = Figure()
         ax = fig.add_subplot(1, 1, 1)
-        img = BytesIO()
+        #python2
+        img = StringIO.StringIO()
+        #python3
+        #img = BytesIO()
         df.plot.bar(stacked=True, 
                     colormap=ListedColormap(sns.color_palette('pastel')))
         ax.set(ylabel='Counts', xlabel='Stars')
