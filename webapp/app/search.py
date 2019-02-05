@@ -16,13 +16,15 @@ class BellaSearch(object):
     def __init__(self):
         """
         """
+        #self.db_fp = '/Users/Nan/Documents/insight/bella/bella/bellaflask/tmp/'
+        self.db_fp = '/home/ubuntu/bellaflask/tmp/'
         pass
     
     def test(self):
         return 'You did it!'
     
     def CustomizedSearch(self, concerns, category,
-                         model_type='fasttext', n_similar_words=10, n_product=3):
+                         model_type='word2vec', n_similar_words=10, n_product=3):
         """Search for reviews containing words semantically similar to keywords
         and sum up sentiment score by products. Return products with highest 
         score.
@@ -33,23 +35,27 @@ class BellaSearch(object):
         review_fp: review information file path, containing sentiment scores.
         model: word embedding models, fasttext or word2vec
         """
-        review_fp = '/Users/Nan/Documents/insight/bella/bella/bellaflask/tmp/review_sentiment.df.pk'
-        with open(review_fp,'rb') as f:
-            reviews = pickle.load(f)
+        review_fp = self.db_fp + 'review_sentiment.tsv'
+        #print(review_fp)
+        #with open(review_fp,'rb') as f:
+        #    reviews = pickle.load(f)
+        reviews = pd.read_table(review_fp)
+        reviews['review'] = reviews['review'].apply(lambda w:w.split(','))
         #reviews = reviews[reviews['r_category'] == category, ]
         
-        model_fp = '/Users/Nan/Documents/insight/bella/bella/bellaflask/tmp/word2vec.pk'
+        model_fp = self.db_fp + 'word2vec.pk'
         if model_type == 'fasttext':
-            model_fp = '/Users/Nan/Documents/insight/bella/bella/bellaflask/tmp/fasttext.pk'
+            model_fp = self.db_fp + 'fasttext.pk'
         with open(model_fp,'rb') as f:
             embedding_model = pickle.load(f)
         print('Word embedding model loaded')
             
         topn = self.concern_score(reviews, concerns, embedding_model, 
                                       n_similar_words, n_product)
-        product_fp = '/Users/Nan/Documents/insight/bella/bella/bellaflask/tmp/product_info.df.pk'
-        with open(product_fp,'rb') as f:
-            product_df = pickle.load(f)
+        product_fp = self.db_fp + 'product_info.tsv'
+        #with open(product_fp,'rb') as f:
+        #    product_df = pickle.load(f)
+        product_df = pd.read_table(product_fp)
         product_df = product_df[product_df['p_category'] == category]
         print('Product file loaded')
 

@@ -13,7 +13,7 @@ import matplotlib.pyplot as plt
 from matplotlib.figure import Figure
 #from matplotlib.backends.backend_agg import FigureCanvasAgg as FigureCanvas
 from matplotlib.colors import ListedColormap
-import StringIO
+from io import BytesIO
 import base64
 import sys
 
@@ -25,23 +25,24 @@ class BellaModel(object):
     def __init__(self):
         """
         """
-        pass
+        self.db_fp = '/Users/Nan/Documents/insight/bella/bella/bellaflask/tmp/'
+        #self.db_fp = '/home/ubuntu/bellaflask/tmp/'
     
     def PredictRating(self, category, text):
         """
         """
         #document to count vector
-        doc_vectorizer_fp = '/Users/Nan/Documents/insight/bella/bella/bellaflask/tmp/cnt_vectorizer.pk'
+        doc_vectorizer_fp =  self.db_fp + 'cnt_vectorizer.pk'
         with open(doc_vectorizer_fp,'rb') as f:
              doc_vectorizer = pickle.load(f)
         text_vec = doc_vectorizer.transform([text])
         #document to topic vector
-        topic_model_fp = '/Users/Nan/Documents/insight/bella/bella/bellaflask/tmp/lda_topic_model.pk'
+        topic_model_fp = self.db_fp + 'lda_topic_model.pk'
         with open(topic_model_fp,'rb') as f:
              topic_model = pickle.load(f)
         topic_vec = topic_model.transform(text_vec)
         #predict rating
-        predict_model_fp = '/Users/Nan/Documents/insight/bella/bella/bellaflask/tmp/lda_GB.model.pk'
+        predict_model_fp = self.db_fp + 'lda_GB.model.pk'
         with open(predict_model_fp,'rb') as f:
              predict_model = pickle.load(f)
         rate = predict_model.predict(topic_vec)
@@ -57,7 +58,7 @@ class BellaModel(object):
     def PlotFeatureImportance(self):
         """Plot ranked importance of features
         """
-        predict_model_fp = '/Users/Nan/Documents/insight/bella/bella/bellaflask/tmp/lda_GB.model.pk'
+        predict_model_fp = self.db_fp + 'lda_GB.model.pk'
         with open(predict_model_fp,'rb') as f:
              model = pickle.load(f)
         importances = model.feature_importances_
@@ -90,16 +91,19 @@ class BellaModel(object):
     def topic_summary(self, topic, category, random=False, n=5):
         """
         """
-        topic = int(topic)
-        fp = '/Users/Nan/Documents/insight/bella/bella/bellaflask/tmp/lda_vectors.df.pk'
-        with open(fp,'rb') as f:
-             topics = pickle.load(f)
-        topic_df = topics[topics['dominant_topic'] == topic]
+        topic_num = int(topic)
+        fp = self.db_fp + 'lda_vectors.tsv'
+        #with open(fp,'rb') as f:
+        #     topics = pickle.load(f)
+        topics = pd.read_table(fp)
+        topic_df = topics[topics['dominant_topic'] == topic_num]
+        #less document than requested number
+        n = min(n, topic_df.shape[0])
         if random:
             reviews = self.PullReviews(topic_df, n=n)
         else:
             topic_df = topic_df.sort_values(topic, ascending=False)
-            reviews = topic_df['review'].head()
+            reviews = topic_df['review'].head(n)
         plot_url =  self.PlotReviewerDistribution(topic_df, category)
         return reviews, plot_url
         
@@ -118,12 +122,12 @@ class BellaModel(object):
         category: category to stratify reviewers, e.g. skin 
         concerns, skin types and age
         """
-        df = pd.DataFrame(topic_df.groupby(['r_star', category])[0].count())
+        df = pd.DataFrame(topic_df.groupby(['r_star', category]).count()['0'])
         df.reset_index(inplace=True)  
-        df = df.pivot(index='r_star', columns=category, values=0)
+        df = df.pivot(index='r_star', columns=category, values='0')
         fig = Figure()
         ax = fig.add_subplot(1, 1, 1)
-        img = StringIO.StringIO()
+        img = BytesIO()
         df.plot.bar(stacked=True, 
                     colormap=ListedColormap(sns.color_palette('pastel')))
         ax.set(ylabel='Counts', xlabel='Stars')
