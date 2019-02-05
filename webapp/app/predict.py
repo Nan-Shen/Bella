@@ -96,10 +96,10 @@ class BellaModel(object):
         """
         """
         topic_num = int(topic)
-        fp = self.db_fp + 'lda_vectors.tsv'
-        #with open(fp,'rb') as f:
-        #     topics = pickle.load(f)
-        topics = pd.read_table(fp)
+        fp = self.db_fp + 'lda_vectors.df.pk'
+        with open(fp,'rb') as f:
+             topics = pickle.load(f)
+        #topics = pd.read_table(fp)
         topic_df = topics[topics['dominant_topic'] == topic_num]
         #less document than requested number
         n = min(n, topic_df.shape[0])

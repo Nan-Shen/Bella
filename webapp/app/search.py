@@ -35,12 +35,12 @@ class BellaSearch(object):
         review_fp: review information file path, containing sentiment scores.
         model: word embedding models, fasttext or word2vec
         """
-        review_fp = self.db_fp + 'review_sentiment.tsv'
+        review_fp = self.db_fp + 'review_sentiment.df.pk'
         #print(review_fp)
-        #with open(review_fp,'rb') as f:
-        #    reviews = pickle.load(f)
-        reviews = pd.read_table(review_fp)
-        reviews['review'] = reviews['review'].apply(lambda w:w.split(','))
+        with open(review_fp,'rb') as f:
+            reviews = pickle.load(f)
+        #reviews = pd.read_table(review_fp)
+        #reviews['review'] = reviews['review'].apply(lambda w:w.split(','))
         #reviews = reviews[reviews['r_category'] == category, ]
         
         model_fp = self.db_fp + 'word2vec.pk'
@@ -55,10 +55,10 @@ class BellaSearch(object):
             
         topn = self.concern_score(reviews, concerns, embedding_model, 
                                       n_similar_words, n_product)
-        product_fp = self.db_fp + 'product_info.tsv'
-        #with open(product_fp,'rb') as f:
-        #    product_df = pickle.load(f)
-        product_df = pd.read_table(product_fp)
+        product_fp = self.db_fp + 'product_info.df.pk'
+        with open(product_fp,'rb') as f:
+            product_df = pickle.load(f)
+        #product_df = pd.read_table(product_fp)
         product_df = product_df[product_df['p_category'] == category]
         print('Product file loaded')
 
