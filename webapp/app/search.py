@@ -84,7 +84,7 @@ class BellaSearch(object):
     
     def concern_score(self, df, concerns, embedding_model, 
                       use_similarity_score=False, n_similar_words=10, 
-                      n_product=5):
+                      n_product=3):
         """Sum up scores based on every concern.
         df: dataframe, review file parsed by parse_reviewTable(), with 'review'
         column containing title and text of reviews and 'r_product' containing
@@ -118,6 +118,7 @@ class BellaSearch(object):
          #                                         ascending=False)
         #top_products = product_score[:n_product].index.values
         top_products = product_score.nlargest(n_product, 'concern_score').index.values
+        print(top_products)
         return top_products
     
     def search_product(self, df, top_product_id, 

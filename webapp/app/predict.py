@@ -92,7 +92,7 @@ class BellaModel(object):
         plot_url = base64.b64encode(img.getvalue()).decode()
         return plot_url
     
-    def topic_summary(self, topic, category, random=False, n=5):
+    def topic_summary(self, topic, category, random=False, n=3):
         """
         """
         topic_num = int(topic)
@@ -106,12 +106,12 @@ class BellaModel(object):
         if random:
             reviews = self.PullReviews(topic_df, n=n)
         else:
-            topic_df = topic_df.sort_values(topic, ascending=False)
+            topic_df = topic_df.sort_values(topic_num, ascending=False)
             reviews = topic_df['review'].head(n)
         plot_url =  self.PlotReviewerDistribution(topic_df, category)
         return reviews, plot_url
         
-    def PullReviews(self, topic_df, n=5):
+    def PullReviews(self, topic_df, n=3):
         """Pull representative reviews for specific topic
         topic: a topic in reviews, request from drop down menu
         """
@@ -126,9 +126,10 @@ class BellaModel(object):
         category: category to stratify reviewers, e.g. skin 
         concerns, skin types and age
         """
-        df = pd.DataFrame(topic_df.groupby(['r_star', category]).count()['0'])
+        #print(topic_df.columns)
+        df = pd.DataFrame(topic_df.groupby(['r_star', category]).count()['r_product'])
         df.reset_index(inplace=True)  
-        df = df.pivot(index='r_star', columns=category, values='0')
+        df = df.pivot(index='r_star', columns=category, values='r_product')
         #matplotlib cannot find the display device on a remote machine
         #use ssh -X -i $hostname:xxxx to log in
         #matplotlib.use('GTK3Cairo')
