@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head >
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Amatic+SC">
+<style>
+  h1 {
+  width: 200px;
+  height: 200px;
+  margin: 0;
+  display: table-cell;
+  vertical-align: middle;
+  text-align: center;
+  }
+</style>
+</head>
+
+<body style="background-color: #FFF3CE;color: #4C8941;">
+{% extends "base.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
+
+{% block app_content %}
+<div class="centered" align="left" text-align="left" display="flex" height="400px" width="8000px" top=50%> 
+     <h1 style="font-family: 'Amatic SC', sans-serif;font-weight: bold;font-size: 70px">Nan Shen</h1>
+</div> 
+<div class="row" align="center"> 
+     <img src="./static/me.001.jpg" alt="Me"> 
+</div>
+</div>
+{% endblock %}
+</body>
+</html>

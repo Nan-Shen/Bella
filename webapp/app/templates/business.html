@@ -1,33 +1,53 @@
 <!-- extend from base layout -->
 {% extends "base.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
 
-{% block content %}
-<h1>Bella Business Analyst</h1>
-<form action="" method="post" name="business">
-      {{ form.hidden_tag() }}
-      <p>
-          Which topic are you interested in?<br>
-          {{ form.topic }}
-          <br>
-      </p>
-      <p>
-          Group people by: <br>
-          {{ form.category }}<br>
-      </p>
-      <p>{{ form.random }} Random Reviews</p>
-      
-      <p><input type="submit" value="Go"></p>
-      <hr>
-      {% for review in reviews %}
-          <table>
-          <tr valign="top">
-            <td>{{review}} <br> </td>
-          </tr>
-          </table>
-      {% endfor %}
-      {% for fig in plot_url %}
-      Distribution of customers in reviews about selected topic: <br>
-         <img src={{fig}} alt="customer distribution">
-      {% endfor %}
-</form>
-{% endblock %}
+ <body>
+  {% block content %}
+  <div class="container" class="navbar nav-tabs nav-justified" style="font-family: 'Lato', sans-serif">
+      <h3>Bella Business Analyst</h3>
+      <form class="form form-horizontal" role= "form" action="" method="post" name="business">
+            {{ form.hidden_tag()}}
+            <div class="row"> 
+                <div class="col-sm-4" style="width: 40%">
+                Which topic are you interested in?<br>
+                    <div class="col-sm-4" style="width: 80%" align="left">
+                          {{ wtf.form_field(form.topic)}}
+                    </div>
+                </div>
+                <div class="col-sm-6" >
+             
+                </div>
+                <div class="col-sm-4" style="width: 40%">
+                Group people by: <br>
+                    <div class="col-sm-4" style="width: 80%" align="left">
+                    {{ wtf.form_field(form.category) }}
+                    </div>
+                </div>
+                <div class="col-sm-2" style="width: 40%">
+                     {{ wtf.form_field(form.random) }}
+                </div>
+                <br>
+                <div class="col-sm-2" style="width: 100%">
+                      <input class="btn btn-info btn-md" type="submit" value="Go" align="center" style="padding: 6px 40px">
+                </div>
+            </div>
+                    
+            {% for review in reviews %}
+                <table class="table table-hover" style="color: #000">
+                   <tr valign="top">
+                       <td width="70px">{{review}} <br> </td>
+                   </tr>
+                </table>
+            {% endfor %}
+            {% for fig in plot_url %}
+                <hr>
+                <div style="width: 40%" align="center">
+                    <img src={{fig}} alt="customer distribution">
+                </div>
+            {% endfor %}
+        </form>
+  </div>
+  {% endblock %}
+</body>
+</html>

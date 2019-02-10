@@ -1,13 +1,33 @@
-{% extends "base1.html" %}
-{% block content %}
-    <h1>Ciao Bella!</h1>
-<form action="" method="post" name="index">
-    {{ form.hidden_tag() }}
-    <p>
-        Log in as<br>
-        {{ form.identity }}
-        <br>
-    </p>
-    <p><input type="submit" value="Go"></p>
-</form>
+<!DOCTYPE html>
+<html>
+<head >
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Amatic+SC">
+<style>
+  h1 {
+  width: 200px;
+  height: 200px;
+  margin: 0;
+  display: table-cell;
+  vertical-align: middle;
+  text-align: center;
+  }
+</style>
+</head>
+
+<body style="background-color: #FFF3CE;background-image:url('./static/sephora_logo.png');background-size:120px 80px;background-repeat:no-repeat;background-position:center top;color: #4C8941;">
+{% extends "base.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
+
+{% block app_content %}
+<div class="container" class="navbar nav-tabs nav-justified" style="font-family: 'Lato', sans-serif">
+<div class="centered" align="center" text-align="center" display="flex" height="400px" width="8000px" top=50%> 
+     <h1 style="font-family: 'Amatic SC', sans-serif;font-weight: bold;font-size: 80px">Ciao Bella!</h1>
+</div> 
+<div class="row" align="center"> 
+    <a href={{customer_url}} class="btn btn-info btn-lg" role="button" style="padding: 10px 30px"> Beauty Advisor </a>
+    <a href={{business_url}} class="btn btn-info btn-lg" role="button" style="padding: 10px 25px"> Business Analyst </a>
+</div>
+</div>
 {% endblock %}
+</body>
+</html>

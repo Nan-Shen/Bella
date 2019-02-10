@@ -1,4 +1,4 @@
-from flask import render_template, flash, redirect, make_response
+from flask import render_template, flash, redirect, make_response, send_from_directory
 from app import app
 from .forms import IndexForm, CustomerForm, BusinessForm
 from .search import BellaSearch
@@ -6,20 +6,18 @@ from .predict import BellaModel
 
 #app = Flask(__name__)
 
+
 # login view function suppressed for brevity
 
 @app.route('/')
 @app.route('/index', methods=['GET', 'POST'])
 def index():
-    form = IndexForm()
-    if form.validate_on_submit():
-       if form.identity.data == 'customer':
-            return redirect('/customer')
-       else:
-            return redirect('/business')
+    
     return render_template('index.html',
                            title='Home',
-                           form=form)
+                           customer_url='/customer',
+                           business_url='/business',
+                           me_url='/me')
 
 @app.route('/test', methods=['GET', 'POST'])
 def test():
@@ -35,22 +33,22 @@ def business():
         reviews, url = bm.topic_summary(form.topic.data, 
                                         form.category.data, 
                                         random=form.random.data, 
-                                        n=5)
+                                        n=2)
         
         plot_url = ["data:image/png;base64,%s" % url]
         
     return render_template('business.html', 
-                           title='Bella business',
+                           title='Business Analyst',
                            form=form,
                            reviews=reviews,
                            plot_url=plot_url)
-    
+
 @app.route('/plot.png')
 def plot_png():
     bs = BellaSearch()
     fig = bs.PlotFeatureImportance()
     response = make_response(fig)
-    response.mimetype = 'image/png'
+    response.mimetype= 'image/png'
     return response
     
 @app.route('/customer', methods=['GET', 'POST'])
@@ -65,9 +63,14 @@ def customer():
         bs = BellaSearch()
         products = bs.CustomizedSearch(concerns, category)
     return render_template('customer.html',
-                           title='Bella customer',
+                           title='Beauty Advisor',
                            form=form,
                            products=products)
 
+@app.route('/me', methods=['GET', 'POST'])
+def me():
+    
+    return render_template('me.html',
+                           title='Me')
     
     

@@ -1,32 +1,66 @@
-<!-- extend from base layout -->
-{% extends "base.html" %}
+<!DOCTYPE html>
+<html lang = "en-US">
+ <head>
+ <meta charset = "UTF-8">
 
-{% block content %}
-<h1>Bella Beauty Advisor</h1>
-<form action="" method="post" name="customer">
-      {{ form.hidden_tag() }}
-      <p>
-          What are you looking for today?<br>
-          {{ form.category }}
-          <br>
-      </p>
-      <p>
-          Any special concerns? e.g. acne, sensitive <br>
-          {{ form.concerns(size=30) }}<br>
-          {% for error in form.concerns.errors %}
-            <span style="color: red;">[{{ error }}]</span>
-          {% endfor %}<br>
-      </p>
-      <p><input type="submit" value="Go"></p>
-      <hr>
-      {% for product in products %}
-      <table>
-        <tr valign="top">
-            <td><img src={{ product.p_image }}></td>
-            <td>{{ product.p_Brand }} <br> <a href={{ product.p_link }}>{{ product.p_Name }}</a></td>
-            <td>Sephora description: <br> {{ product.p_function}}</td>
-        </tr>
-      </table>
-      {% endfor %}
-</form>
-{% endblock %}
+ </head>
+ <body>
+ <!-- extend from base layout -->
+   {% extends "base.html" %}
+   {% import "bootstrap/wtf.html" as wtf %}
+   
+   {% block content %}
+   <div class="container" class="navbar nav-tabs nav-justified" style="font-family: 'Lato', sans-serif">
+       <h3>Bella Beauty Advisor</h3>
+       <form class="form form-horizontal" role= "form" action="" method="post" name="customer">
+             {{ form.hidden_tag()}}
+             <div class="row"> 
+                 <div class="col-sm-4" style="width: 40%">
+                 What are you looking for today?<br>
+                     <div class="col-sm-4" style="width: 40%" align="left">
+                           {{ wtf.form_field(form.category)}}
+                     </div>
+                 </div>
+                 <div class="col-sm-6" >
+                
+                 </div>
+                 <div class="col-sm-4" style="width: 40%">
+                 Any special concerns? e.g. acne, sensitive <br>
+                     <div class="col-sm-4" style="width: 100%" align="left">
+                     {{ wtf.form_field(form.concerns) }}
+                     </div>
+                 {% for error in form.concerns.errors %}
+                    <span style="color: red;">[{{ error }}]</span>
+                 {% endfor %}<br>
+                 </div>
+                 <div class="col-sm-2" style="width: 100%">
+                      <input class="btn btn-info btn-md" type="submit" value="Go" align="center" style="padding: 6px 40px">
+                 </div>
+             </div>
+       </form>
+    
+       {% if  products  %}
+          <hr>
+          <table class="table table-hover" style="color: #000;background-color: #fff">
+             <thead>
+                <tr>
+                    <th> </th>
+                    <th> Product </th>
+                    <th> Details </th>
+                </tr>
+             </thead>   
+             <tbody>
+                {% for product in products %}
+                   <tr valign="top" halign="left">
+                      <td ><img src={{ product.p_image }}></td>
+                      <td >{{ product.p_Brand }} <br> <a href={{ product.p_link }}>{{ product.p_Name }}</a></td>
+                      <td >{{ product.p_function}}</td>
+                   </tr>
+                {% endfor %}              
+             </tbody>
+          </table> 
+       {% endif %}
+   </div>
+   {% endblock %}
+  </body>
+</html>
