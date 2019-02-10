@@ -16,8 +16,8 @@ class BellaSearch(object):
     def __init__(self):
         """
         """
-        #self.db_fp = '/Users/Nan/Documents/insight/bella/bella/bellaflask/tmp/'
-        self.db_fp = '/home/ubuntu/bellaflask/tmp/'
+        self.db_fp = '/Users/Nan/Documents/insight/bella/bella/bellaflask/tmp/'
+        #self.db_fp = '/home/ubuntu/bellaflask/tmp/'
         pass
     
     def test(self):
