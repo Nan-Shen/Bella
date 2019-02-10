@@ -14,20 +14,21 @@
 </style>
 </head>
 
-<body style="background-color: #FFF3CE;background-image:url('./static/sephora_logo.png');background-size:120px 80px;background-repeat:no-repeat;background-position:center top;color: #4C8941;">
+<body>
 {% extends "base.html" %}
 {% import "bootstrap/wtf.html" as wtf %}
 
 {% block app_content %}
 <div class="container" class="navbar nav-tabs nav-justified" style="font-family: 'Lato', sans-serif">
 <div class="centered" align="center" text-align="center" display="flex" height="400px" width="8000px" top=50%> 
-     <h1 style="font-family: 'Amatic SC', sans-serif;font-weight: bold;font-size: 80px">Ciao Bella!</h1>
+     <h1 style="font-family: 'Amatic SC', sans-serif;font-weight: bold;font-size: 80px;text-shadow: 3px 3px #FFF3CE">Ciao Bella!</h1>
 </div> 
 <div class="row" align="center"> 
-    <a href={{customer_url}} class="btn btn-info btn-lg" role="button" style="padding: 10px 30px"> Beauty Advisor </a>
-    <a href={{business_url}} class="btn btn-info btn-lg" role="button" style="padding: 10px 25px"> Business Analyst </a>
+    <a href={{customer_url}} class="btn btn-info btn-lg" role="button" style="padding: 10px 30px;text-shadow: 0px 0px #FFF3CE"> Beauty Advisor </a>
+    <a href={{business_url}} class="btn btn-info btn-lg" role="button" style="padding: 10px 25px;text-shadow: 0px 0px #FFF3CE"> Business Analyst </a>
 </div>
 </div>
 {% endblock %}
 </body>
 </html>
+
