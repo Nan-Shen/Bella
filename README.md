@@ -4,6 +4,7 @@
 Bella is a web app with two functions: 
 1. To customers: provide personalized beauty products recommendations.
 2. To Business: offer insights of customer segmentation.
+You may check Bella_Tella.pdf for pipeline and summary report.
 
 ## How to use?
 1. Open http://23552.club (B-E-L-L-A on cell phone keypad is 23552.)
