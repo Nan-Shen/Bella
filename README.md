@@ -24,7 +24,7 @@ This note contains scripts I used to generate topics used in Business Analyst pa
 I tried to build a prediction model with topic distribution in reviews. But topics alone cannot determine ratings (customer attitude). Then, I used topics in another way explained above.
 
 ## Dependency
-You can copy and paste the text bellow, save it as bella_environment.yml. Then you can recreate my environment with "conda env create -f environment.yml".
+You can copy and paste the text bellow, save it as bella_environment.yml. Then you can recreate my environment with "conda env create -f bella_environment.yml".
 
 name: bella
 channels:
