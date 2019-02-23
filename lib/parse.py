@@ -107,6 +107,7 @@ class BellaParse(object):
         """ remove stop words, lemmatized and stemming given text.
         """
         clean_text = self.regex.sub('', text)
+        #correct_text = TextBlob(clean_text).correct()
         no_stop = ' '.join(filter(lambda w: w not in self.stop, clean_text.split()))
         lemmatized = self.lemma.lemmatize(no_stop, pos='v')
         normalized = ' '.join(map(self.snowball.stem, lemmatized.split(' ')))
@@ -122,26 +123,28 @@ class BellaParse(object):
         tokens = [tok.strip().lower() for tok in tokenizer_regex.split(text)]
         return tokens
      
-    def parse_product(self, fp):
+    def parse_product(self, df):
         """Parse product information file, return product link, image, and skin
         concerns it solves.
         fp: file path of product file.
         """
-        df = pd.read_table(fp)
+        #df = pd.read_table(fp)
         functions = []
         for i in range(df.shape[0]):
             des = df['p_description'].iloc[i]
             try:
-                functions.append(re.findall('Solutions for:([\S\s]+)'\
-                                       'If you want to know more', des)[0])
+                func = re.findall('Solutions for:([\S\s]+.)'\
+                                       'If you want to know more', des)[0]
+                functions.append(func.split('.')[0])
             except:
                 try:
-                    functions.append(re.findall('Skincare Concerns:([\S\s]+)'
-                                           'Formulation:', des)[0])
+                    func = re.findall('Skincare Concerns:([\S\s]+.)'
+                                           'Formulation:', des)[0]
+                    functions.append(func.split('.')[0])
                 except:
                     try:
-                        functions.append(re.findall('What it is:([\S\s]+)'\
-                                               'What it', des)[0])
+                        func = re.findall('What it is:([\S\s]+.)', des)[0]
+                        functions.append(func.split('.')[0])
                     except:
                         functions.append('NA')
         df['p_function'] = functions

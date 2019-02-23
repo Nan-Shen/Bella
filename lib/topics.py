@@ -5,8 +5,6 @@ Created on Mon Jan 28 22:10:54 2019
 
 @author: Nan
 """
-import re
-import string
 from collections import defaultdict
 
 from gensim.models.coherencemodel import CoherenceModel
@@ -15,8 +13,10 @@ from gensim.models.coherencemodel import CoherenceModel
 
 from sklearn.feature_extraction.text import CountVectorizer, TfidfVectorizer
 from sklearn.decomposition import NMF, LatentDirichletAllocation
+from sklearn.model_selection import GridSearchCV
 
-class BellaParse(object):
+
+class BellaTopics(object):
     """All parse, clean and preprocess
     """
     def __init__(self):
@@ -93,5 +93,21 @@ class BellaParse(object):
                                              texts=docs, dictionary=dictionary, 
                                              coherence="u_mass")
         coherence_lda = coherence_model_lda.get_coherence()
+        
+    def Best_topic_model(self, params, model, vectors):
+        """Search for the best topic model parameters. 
+        params: grid search parameters. e.g. {'n_components': 
+            [10, 15, 20, 25, 30], 'learning_decay': [.5, .7, .9]}
+        model: topic model.
+        vector: vectorized data.
+        """
+        grid_model = GridSearchCV(model, param_grid=params)
+        grid_model.fit(vectors)
+        best_model = grid_model.best_estimator_
+        print("Best Model's Params: ", grid_model.best_params_)
+        print("Best Log Likelihood Score: ", grid_model.best_score_)
+        print("Model Perplexity: ", best_model.perplexity(vectors))
+        return grid_model
+        
       
         

@@ -1,5 +1,4 @@
-
-#!/usr/bin/env python2
+#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
 Created on Mon Jan 28 21:58:18 2019
@@ -8,7 +7,6 @@ Created on Mon Jan 28 21:58:18 2019
 """
 
 import pandas as pd
-import re
 
 from gensim.models import Word2Vec, FastText
 

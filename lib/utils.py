@@ -1,12 +1,4 @@
-#!/usr/bin/env python2
-# -*- coding: utf-8 -*-
-"""
-Created on Mon Jan 28 22:12:43 2019
-
-@author: Nan
-"""
-
-#!/usr/bin/env python2
+#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
 Created on Mon Jan 28 22:10:54 2019
@@ -20,7 +12,9 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 
 import nltk
-from sklearn.decomposition import PCA, 
+from nltk.cluster.kmeans import KMeansClusterer
+
+from sklearn.decomposition import PCA
 from sklearn.manifold import TSNE
 	
 #import pyLDAvis.sklearn
@@ -49,7 +43,7 @@ class BellaUtils(object):
     def TSNE_clustering(self, f_name, vectors, volcabulary):
         """Creates and TSNE model and plots it
         """
-        tsne_model = TSNE(perplexity=40, n_components=2, init='pca', 
+        tsne_model = TSNE(perplexity=40, n_components=8, init='pca', 
                           n_iter=2500, random_state=23)
         new_values = tsne_model.fit_transform(vectors)
 
@@ -89,6 +83,27 @@ class BellaUtils(object):
             sns.lmplot(x=x, y=y, data=pca_v, 
                        hue='color', fit_reg=False, scatter_kws={'s': 10})
             plt.savefig(f_name + '.' + x + '-' + y + '.png')
+            
+    
+    def log_likelyhood_plot(self, grid_model, params, fname):
+        """Plot log likelyhood change as params change.
+        grid_model: gird search model
+        params: grid search parameters, include learning decay and topic numbers.
+         e.g. {'n_components': [10, 15, 20, 25, 30], 
+         'learning_decay': [.5, .7, .9]}
+        """
+        cv_results = grid_model.cv_results_
+        params_n = cv_results['param_n_components'].data
+        params_decay = cv_results['param_learning_decay'].data
+        score = cv_results['mean_test_score']
+        data = pd.DataFrame({'log_likelyhood':score, 
+                             'n_topics':params_n, 
+                             'learning_decay':params_decay})
+        plt.figure()
+        sns.set_color_codes('pastel')
+        sns.catplot(x='n_topics', y='log_likelyhood', hue='learning_decay',
+                    data=data, kind='point', palette='pastel')
+        plt.savefig(fname + '.jpg')    
             
             
     """ review_parts = parse_reviewTable(fp, products='all')
