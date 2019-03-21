@@ -19,10 +19,6 @@ def index():
                            business_url='/business',
                            me_url='/me')
 
-@app.route('/test', methods=['GET', 'POST'])
-def test():
-    return render_template('test.html')
-
 @app.route('/business', methods=['GET', 'POST'])
 def business():
     form = BusinessForm()
@@ -42,14 +38,6 @@ def business():
                            form=form,
                            reviews=reviews,
                            plot_url=plot_url)
-
-@app.route('/plot.png')
-def plot_png():
-    bs = BellaSearch()
-    fig = bs.PlotFeatureImportance()
-    response = make_response(fig)
-    response.mimetype= 'image/png'
-    return response
     
 @app.route('/customer', methods=['GET', 'POST'])
 def customer():
