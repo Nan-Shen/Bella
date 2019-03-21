@@ -1,4 +1,4 @@
-#!/usr/bin/env python2
+#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
 Created on Mon Jan 28 21:58:18 2019
@@ -16,8 +16,7 @@ class BellaSearch(object):
     def __init__(self):
         """
         """
-        self.db_fp = '/Users/Nan/Documents/insight/bella/bella/bellaflask/tmp/'
-        #self.db_fp = '/home/ubuntu/bellaflask/tmp/'
+        self.db_fp = '/home/ubuntu/bellaflask/tmp/'
         pass
     
     def test(self):
@@ -36,21 +35,14 @@ class BellaSearch(object):
         model: word embedding models, fasttext or word2vec
         """
         review_fp = self.db_fp + 'review_sentiment.df.pk'
-        #print(review_fp)
         with open(review_fp,'rb') as f:
             reviews = pickle.load(f)
-        #reviews = pd.read_table(review_fp)
-        #reviews['review'] = reviews['review'].apply(lambda w:w.split(','))
-        #reviews = reviews[reviews['r_category'] == category, ]
-        
+  
         model_fp = self.db_fp + 'word2vec.pk'
         if model_type == 'fasttext':
             model_fp = self.db_fp + 'fasttext.pk'
         with open(model_fp,'rb') as f:
             embedding_model = pickle.load(f)
-            #u = pickle._Unpickler(f)
-            #u.encoding = 'latin1'
-            #embedding_model = u.load()
         print('Word embedding model loaded')
             
         topn = self.concern_score(reviews, concerns, embedding_model, 
@@ -58,7 +50,6 @@ class BellaSearch(object):
         product_fp = self.db_fp + 'product_info.df.pk'
         with open(product_fp,'rb') as f:
             product_df = pickle.load(f)
-        #product_df = pd.read_table(product_fp)
         product_df = product_df[product_df['p_category'] == category]
         print('Product file loaded')
 
@@ -114,9 +105,6 @@ class BellaSearch(object):
         c_score = self.feature_score(df, key_words, review_column='reviews')
         df['concern_score'] = c_score
         product_score = df.groupby(['r_product'])[['concern_score']].sum()
-        #product_score = product_score.sort_values(by='concern_score', 
-         #                                         ascending=False)
-        #top_products = product_score[:n_product].index.values
         top_products = product_score.nlargest(n_product, 'concern_score').index.values
         print(top_products)
         return top_products
