@@ -29,7 +29,6 @@ class BellaModel(object):
     def __init__(self):
         """
         """
-        #self.db_fp = '/Users/Nan/Documents/insight/bella/bella/bellaflask/tmp/'
         self.db_fp = '/home/ubuntu/bellaflask/tmp/'
     
     def PredictRating(self, category, text):
@@ -54,8 +53,6 @@ class BellaModel(object):
             rating = 'love it!'
         else:
             rating = 'meh...'
-        #show feature importance plot
-        #self.PlotFeatureImportance(model)
         return rating
             
     
@@ -80,13 +77,8 @@ class BellaModel(object):
         sns.set_color_codes('pastel')
         ax = sns.barplot(x='importance', y='feature', data=feature_importances,
                     label='importance', orient='h', order=topic_order)
-        #ax.barh(feature_importances['feature'], 
-        #        feature_importances['importance'], align='center')
         # Add a legend and informative axis label
         ax.set(ylabel='Topics', xlabel='Topic importance')
-        #canvas = FigureCanvas(fig)
-        #output = StringIO.StringIO()
-        #canvas.print_png(output)
         plt.savefig(img, format='png')
         img.seek(0)
         plot_url = base64.b64encode(img.getvalue()).decode()
@@ -99,7 +91,6 @@ class BellaModel(object):
         fp = self.db_fp + 'lda_vectors.df.pk'
         with open(fp,'rb') as f:
              topics = pickle.load(f)
-        #topics = pd.read_table(fp)
         topic_df = topics[topics['dominant_topic'] == topic_num]
         #less document than requested number
         n = min(n, topic_df.shape[0])
@@ -126,13 +117,11 @@ class BellaModel(object):
         category: category to stratify reviewers, e.g. skin 
         concerns, skin types and age
         """
-        #print(topic_df.columns)
         df = pd.DataFrame(topic_df.groupby(['r_star', category]).count()['r_product'])
         df.reset_index(inplace=True)  
         df = df.pivot(index='r_star', columns=category, values='r_product')
         #matplotlib cannot find the display device on a remote machine
         #use ssh -X -i $hostname:xxxx to log in
-        #matplotlib.use('GTK3Cairo')
         fig = Figure()
         ax = fig.add_subplot(1, 1, 1)
         #python2
